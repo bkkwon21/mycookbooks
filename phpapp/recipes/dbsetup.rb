@@ -1,12 +1,10 @@
-node[:deploy].each do |app_name, deploy|
-  execute "mysql-create-table" do
-    command "/usr/bin/mysql -u#{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]} -e'CREATE TABLE #{node[:phpapp][:dbtable]}(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    author VARCHAR(63) NOT NULL,
-    message TEXT,
-    PRIMARY KEY (id)
-  )'"
-    not_if "/usr/bin/mysql -u#{deploy[:database][:username]} -p#{deploy[:database][:password]} #{deploy[:database][:database]} -e'SHOW TABLES' | grep #{node[:phpapp][:dbtable]}"
-    action :run
-  end
+remote_file "/tmp/jdk-6u45-linux-amd64.rpm" do
+    source "https://s3.amazonaws.com/sunjava/jdk-6u45-linux-amd64.rpm"
+    action :create
+end
+
+
+rpm_package "jdk-6u45-linux" do
+    source "/tmp/jdk-6u45-linux-amd64.rpm"
+    action :install
 end
