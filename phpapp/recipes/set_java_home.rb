@@ -19,9 +19,9 @@
 ruby_block  "set-env-java-home" do
   block do
 	puts "java_home : #{node['java']['java_home']}"
-    ENV["JAVA_HOME"] = node['java']['java_home']
+    ENV["JAVA_HOME"] = "/usr/java/default"
   end
-  not_if { ENV["JAVA_HOME"] == node['java']['java_home'] }
+  not_if { ENV["JAVA_HOME"] == "/usr/java/default" }
 end
 
 directory "/etc/profile.d" do
@@ -29,6 +29,6 @@ directory "/etc/profile.d" do
 end
 
 file "/etc/profile.d/jdk.sh" do
-  content "export JAVA_HOME=#{node['java']['java_home']}"
+  content "export JAVA_HOME=/usr/java/default"
   mode 00755
 end
