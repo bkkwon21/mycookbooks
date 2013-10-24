@@ -18,6 +18,7 @@
 
 ruby_block  "set-env-java-home" do
   block do
+	puts "java_home : #{node['java']['java_home']}"
     ENV["JAVA_HOME"] = node['java']['java_home']
   end
   not_if { ENV["JAVA_HOME"] == node['java']['java_home'] }
