@@ -1,1 +1,0 @@
-default['java']['java_home'] = "/usr/java/default"
