@@ -1,1 +1,1 @@
-default[:phpapp][:dbtable] = 'urler'
+default['java']['java_home'] = "/usr/java/default"
